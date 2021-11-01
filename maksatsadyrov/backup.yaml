@@ -1,0 +1,9 @@
+---
+- name: R1Soft backup solution
+  hosts: all
+  user: ec2-user
+  connection: ssh
+  become: yes
+  become_method: sudo
+  roles:
+    - role: "roles/backup"

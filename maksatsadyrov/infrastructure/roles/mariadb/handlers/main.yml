@@ -1,0 +1,8 @@
+---
+# handlers file for mariadb
+  - name: Start DB server
+    when: ( ansible_facts['distribution'] == "Ubuntu" )
+    systemd: 
+      name: mariadb 
+      state: restarted
+      enabled: true

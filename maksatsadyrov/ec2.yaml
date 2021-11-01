@@ -1,0 +1,5 @@
+---
+- name: add ec2 instances
+  hosts: localhost
+  roles:
+    - role: "roles/ec2"

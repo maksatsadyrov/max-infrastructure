@@ -1,0 +1,8 @@
+---
+# tasks file for apache
+  - action: ping
+  - name: install apache
+    when: ( ansible_facts['distribution'] == "Ubuntu" )
+    apt: name=apache2 update_cache=yes state=latest
+    notify: 
+    - Start web server

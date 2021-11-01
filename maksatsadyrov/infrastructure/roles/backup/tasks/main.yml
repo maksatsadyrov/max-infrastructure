@@ -1,0 +1,28 @@
+---
+# tasks file for backup
+  - name: Create a repo
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.copy:
+      content: "deb http://repo.r1soft.com/apt stable main"
+      dest: /etc/apt/sources.list
+
+  - name: Add an Apt signing key
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.apt_key:
+      url: http://repo.r1soft.com/r1soft.asc 
+      state: present
+
+  - name: Run the equivalent of "apt-get update" as a separate step
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: Install agent
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.package:
+      name: serverbackup-enterprise-agent
+      state: present
+    notify:
+    - Start R1soft Agent 
+    - Test Connection
+    - Get Key

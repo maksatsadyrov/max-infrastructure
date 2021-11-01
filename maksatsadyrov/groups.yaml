@@ -1,0 +1,5 @@
+---
+- name: add AWS IAM users and group
+  hosts: localhost
+  roles:
+    - role: "roles/groups"

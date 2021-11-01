@@ -1,0 +1,16 @@
+---
+# handlers file for backup
+  - name: Test Connection
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.raw: serverbackup-setup --test-connection
+
+  - name: Get Key
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.command: r1soft-setup --get-key http://{{ SERVER }}
+
+  - name: Start R1soft Agent 
+    when: ( ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution_version'] == "16.04" )
+    ansible.builtin.systemd: 
+      name: sbm-agent.service
+      state: restarted
+      enabled: true

@@ -1,0 +1,11 @@
+---
+- name: LAMP/WordPress
+  hosts: all
+  user: ec2-user
+  become: yes
+  become_method: sudo
+  roles:
+    - roles/apache
+    - roles/mariadb
+    - roles/php
+    - roles/wordpress

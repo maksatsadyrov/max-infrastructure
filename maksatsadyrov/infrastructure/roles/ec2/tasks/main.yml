@@ -1,0 +1,9 @@
+---
+# tasks file for ec2
+  - amazon.aws.ec2:
+      key_name: laptop
+      instance_type: t2.micro
+      image: ami-074cce78125f09d61
+      wait: yes
+      count: 3
+      region: us-east-2

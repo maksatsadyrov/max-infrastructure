@@ -1,0 +1,11 @@
+---
+# tasks file for mariadb
+  - name: install mariadb prerequisites
+    when: ( ansible_facts['distribution'] == "Ubuntu" )
+    apt: pkg=software-properties-common update_cache=yes
+ 
+  - name: install mariadb
+    when: ( ansible_facts['distribution'] == "Ubuntu" )
+    apt: pkg=mariadb-server update_cache=yes
+    notify: 
+    - Start DB server
